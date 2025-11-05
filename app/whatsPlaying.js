@@ -443,7 +443,7 @@ function updatePlayingScreen(data) {
   setText('playingAlbum', data.album);
   setText('playingArtist', data.artist);
   setText('playingDate', data.date);
-  setText('playingPlaylist', data.playlist);
+  // setText('playingPlaylist', data.playlist);
   updatePlayMeter(gNowPlaying);
 
   if (data.albumImage != gLastVal.albumImage) {
@@ -546,13 +546,13 @@ async function getPlaybackState() {
 
       if (id != oldId) {
         // maybe get playlist name
-        var playlist;
-        if ( data.context && data.context.type == 'playlist' && data.context.href ) {
-          var pl = await spotifyApiDirect('GET', data.context.href);
-          if ( "data" in pl ) {
-            playlist = pl.data.name;
-          }
-        }
+        // var playlist;
+        // if ( data.context && data.context.type == 'playlist' && data.context.href ) {
+        //   var pl = await spotifyApiDirect('GET', data.context.href);
+        //   if ( "data" in pl ) {
+        //     playlist = pl.data.name;
+        //   }
+        // }
 
         gNowPlaying.type = data.currently_playing_type;  // e.g. 'track'
         gNowPlaying.id = id;                             // track ID
@@ -562,7 +562,7 @@ async function getPlaybackState() {
         gNowPlaying.date = getYearFromDate(album.release_date, album.release_date_precision);
         gNowPlaying.explicit = track.explicit;
         gNowPlaying.popularity = track.popularity;
-        gNowPlaying.playlist = playlist;
+        // gNowPlaying.playlist = playlist;
         gNowPlaying.albumImage = getAlbumImage(album.images);
         gNowPlaying.duration = track.duration_ms;
       }

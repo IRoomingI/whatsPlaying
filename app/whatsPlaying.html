@@ -69,9 +69,9 @@
           display: block;
           -webkit-animation: fadeIn 1.0s;
           animation: fadeIn 1.0s;
-          width: 65vw;
+          width: 70vw;
           height: 88vh;
-          padding: 3vh 4vw 3vh 4vw;
+          padding: 3vh 0vw 3vh 4vw;
       }
 
       .screenOff {
@@ -112,10 +112,11 @@
           display: flex;
           align-items: center;
           justify-content: center;
-          padding: 1em;
-          padding-top: 0.5em;
-          font-size: 5vw;
+          /*! padding: em; */
+          /*! padding-top: 0.5em; */
+          font-size: 6vw;
           font-family: Starborn;
+          margin: 1em;
       }
 
       .weather {
@@ -124,7 +125,7 @@
           justify-content: center;
           padding: 0.8em;
           padding-top: 0.5em;
-          font-size: 3vw;
+          font-size: 4vw;
           font-family: Starborn;
       }
 
@@ -188,9 +189,21 @@
           margin-left: 2em;
           justify-content: center;
           flex: 1 1 50%;
-          font-size: 3.26vh;
-          font-weight: normal;
+          font-size: 4vh;
+          font-weight: bold;
           text-align: center;
+      }
+      
+      .playingAlbumInfo {
+        display: flex;
+          flex-direction: column;
+          align-items: left;
+          margin-left: 0.5em;
+          justify-content: left;
+          flex: 1 1 50%;
+          font-size: 4vh;
+          font-weight: bold;
+          text-align: left;
       }
 
       .playingItem {
@@ -199,17 +212,20 @@
       }
 
       .playingTrack {
-          font-size: 4.56vh;
+          font-size: 5.5vh;
       }
 
       .playingAlbum {
+        margin-left: 0;
       }
 
       .playingArtist {
       }
 
       .playingDate {
-          font-size: 1.95vh;
+          font-size: 3.5vh;
+          margin-top: 0;
+          margin-left: 0;
       }
 
       .playingPlaylist {
@@ -223,7 +239,7 @@
           opacity: 0; /* hide until we're playing but retain screen space */
           height: 1.30vh;
           width: 100%;
-          margin-top: 4em;
+          margin-top: 3em;
           background: black;
           border: 0.13vh solid #7b0202;
           border-radius: 0.65vh;
@@ -239,9 +255,9 @@
 
       .playingControls {
           display: none; /* hidden until we need it */
-          width: 14em;
-          margin-top: 2em;
-          padding: 0.5em;
+          width: 12em;
+          margin-top: 1.5em;
+          padding: 0.2em;
           border: 0.26vh solid #7b0202;
           border-radius: 1em;
       }
@@ -252,10 +268,11 @@
       }
 
       .playingControl svg {
-          width: 2em;
+          width: 1.3em;
           height: 2em;
           fill: #7b0202;
       }
+
 
    </style>
 </head>
@@ -320,8 +337,6 @@
                 <div class="playingInfo">
                     <div id="playingTrack" class="playingTrack playingItem"></div>
                     <div id="playingArtist" class="playingArtist playingItem"></div>
-                    <div id="playingAlbum" class="playingAlbum playingItem"></div>
-                    <div id="playingDate" class="playingDate playingItem"></div>
                     <div id="playingMeter" class="playingMeter playingItem">
                         <span id="playingMeterValue"></span>
                     </div>
@@ -340,7 +355,11 @@
                 </div>
             </div>
 
-            <div id="playingPlaylist" class="playingItem playingPlaylist"></div>
+            <!-- <div id="playingPlaylist" class="playingItem playingPlaylist"></div> -->
+            <div class="playingAlbumInfo">
+                <div id="playingAlbum" class="playingAlbum playingItem"></div>
+                <div id="playingDate" class="playingDate playingItem"></div>
+            </div> 
             </div>
         </div>
         <div id="clock" class="clock"></div>
