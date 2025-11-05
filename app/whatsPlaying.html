@@ -14,13 +14,18 @@
    <script src="whatsPlaying.js"></script>
 
    <style>
+        @font-face {
+            font-family: Starborn;
+            src: url(Starborn.woff2); 
+        }
+
       * {
           /* font-family: sans-serif; */
           box-sizing: border-box;
           -moz-box-sizing: border-box;
           padding: 0;
           margin: 0;
-          color: #333;
+          color: #d21a1a;
           user-select: none;
       }
 
@@ -29,7 +34,7 @@
           width: 100%;
           height: 100%;
           overflow: hidden;
-          background-color: rgb(252, 251, 241);
+          background-color: rgb(234, 158, 208);
           cursor: none;
       }
 
@@ -110,7 +115,7 @@
           padding: 1em;
           padding-top: 0.5em;
           font-size: 5vw;
-          font-family: serif;
+          font-family: Starborn;
       }
 
       .weather {
@@ -120,7 +125,7 @@
           padding: 0.8em;
           padding-top: 0.5em;
           font-size: 3vw;
-          font-family: serif;
+          font-family: Starborn;
       }
 
       .logo {
@@ -220,7 +225,7 @@
           width: 100%;
           margin-top: 4em;
           background: black;
-          border: 0.13vh solid #333;
+          border: 0.13vh solid #7b0202;
           border-radius: 0.65vh;
       }
 
@@ -237,7 +242,7 @@
           width: 14em;
           margin-top: 2em;
           padding: 0.5em;
-          border: 0.26vh solid #333;
+          border: 0.26vh solid #7b0202;
           border-radius: 1em;
       }
 
@@ -249,7 +254,7 @@
       .playingControl svg {
           width: 2em;
           height: 2em;
-          fill: black;
+          fill: #7b0202;
       }
 
    </style>
