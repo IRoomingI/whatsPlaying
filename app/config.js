@@ -21,4 +21,8 @@ Config = {
   localLogin: false,          // show login button (TODO)
   showMouse: true,            // show the mouse cursor
   showPlayerControls: false,  // show player controls
+
+  // -- options for weather data
+  latitude: "35.6895",
+  longitude: "139.6917"
 };
