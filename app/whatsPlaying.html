@@ -117,6 +117,8 @@
           font-size: 6vw;
           font-family: Starborn;
           margin: 1em;
+          margin-bottom: 0;
+          margin-top: 0.5em;
       }
 
       .weather {
@@ -125,7 +127,7 @@
           justify-content: center;
           padding: 0.8em;
           padding-top: 0.5em;
-          font-size: 4vw;
+          font-size: 5vw;
           font-family: Starborn;
       }
 
@@ -175,7 +177,7 @@
           flex: 1 1 50%;
           opacity: 0; /* hide until there is an image but retain screen space */
           min-width: 25vh;
-          max-width: 74vh;
+          max-width: 50vh;
           min-height: 25vh;
           max-height: 74vh;
           border: 0.13vh solid #9e9e9e;
@@ -191,19 +193,20 @@
           flex: 1 1 50%;
           font-size: 4vh;
           font-weight: bold;
+          font-family: Starborn;
           text-align: center;
       }
       
       .playingAlbumInfo {
         display: flex;
-          flex-direction: column;
-          align-items: left;
-          margin-left: 0.5em;
-          justify-content: left;
-          flex: 1 1 50%;
-          font-size: 4vh;
-          font-weight: bold;
-          text-align: left;
+        flex-direction: column;
+        align-items: left;
+        margin-left: 0.5em;
+        justify-content: left;
+        flex: 1 1 50%;
+        font-size: 4vh;
+        font-weight: bold;
+        text-align: left;
       }
 
       .playingItem {
@@ -240,16 +243,16 @@
           height: 1.30vh;
           width: 100%;
           margin-top: 3em;
-          background: black;
-          border: 0.13vh solid #7b0202;
+          background: #7b0202;
+          border: 0.25vh solid #7b0202;
           border-radius: 0.65vh;
       }
 
       .playingMeter > span {
           display: block;
           height: 100%;
-          background: #777;
-          border: 0.13vh solid #444;
+          background: #e9cbe0;
+          border: 0.13vh solid #e9cbe0;
           border-radius: 0.52vh;
       }
 
@@ -333,7 +336,12 @@
 
             <div id="playingScreen" class="screen screenOff">
             <div class="playingContent">
-                <img id="playingAlbumImage" class="playingAlbumImage"></img>
+                
+                <div class="playingAlbumInfo">
+                    <img id="playingAlbumImage" class="playingAlbumImage"></img>
+                    <div id="playingAlbum" class="playingAlbum playingItem"></div>
+                    <div id="playingDate" class="playingDate playingItem"></div>
+                </div> 
                 <div class="playingInfo">
                     <div id="playingTrack" class="playingTrack playingItem"></div>
                     <div id="playingArtist" class="playingArtist playingItem"></div>
@@ -356,10 +364,6 @@
             </div>
 
             <!-- <div id="playingPlaylist" class="playingItem playingPlaylist"></div> -->
-            <div class="playingAlbumInfo">
-                <div id="playingAlbum" class="playingAlbum playingItem"></div>
-                <div id="playingDate" class="playingDate playingItem"></div>
-            </div> 
             </div>
         </div>
         <div id="clock" class="clock"></div>
