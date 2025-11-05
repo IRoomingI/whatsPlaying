@@ -15,19 +15,21 @@
 
    <style>
       * {
-          font-family: sans-serif;
+          /* font-family: sans-serif; */
           box-sizing: border-box;
           -moz-box-sizing: border-box;
           padding: 0;
           margin: 0;
-          color: #eee;
+          color: #333;
+          user-select: none;
       }
 
       html, body {
+          font-family: sans-serif;
           width: 100%;
           height: 100%;
           overflow: hidden;
-          background-color: black;
+          background-color: rgb(252, 251, 241);
           cursor: none;
       }
 
@@ -62,7 +64,7 @@
           display: block;
           -webkit-animation: fadeIn 1.0s;
           animation: fadeIn 1.0s;
-          width: 100vw;
+          width: 65vw;
           height: 88vh;
           padding: 3vh 4vw 3vh 4vw;
       }
@@ -72,10 +74,19 @@
       }
 
       .container {
-          display: flex;
-          flex-direction: column;
+        display: grid;
+        grid-template-columns: auto auto auto;
+        gap: 5px;
+        padding: 5px;
+      }
+
+      .spotifyContainer {
+          /* display: flex; */
+          /* flex-direction: column; */
           justify-content: space-around;
           align-items: center;
+          grid-column: 1 / span 2;
+          grid-row: 1 / span 2;
       }
 
       .titleBar {
@@ -89,12 +100,27 @@
       }
 
       .clock {
-          float: right;
+          /* float: right;
           position: absolute;
           top: 0;
-          right: 0;
+          right: 0; */
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 1em;
+          padding-top: 0.5em;
+          font-size: 5vw;
+          font-family: serif;
+      }
+
+      .weather {
+          display: flex;
+          align-items: center;
+          justify-content: center;
           padding: 0.8em;
-          font-size: 3.26vh;
+          padding-top: 0.5em;
+          font-size: 3vw;
+          font-family: serif;
       }
 
       .logo {
@@ -146,8 +172,8 @@
           max-width: 74vh;
           min-height: 25vh;
           max-height: 74vh;
-          border: 0.13vh solid #777;
-          box-shadow: 0.52vh 0.52vh 1.30vh -0.26vh rgb(255 255 255 / 50%);
+          border: 0.13vh solid #9e9e9e;
+          box-shadow: 0.52vh 0.52vh 1.30vh -0.26vh rgba(30, 30, 30, 0.5);
       }
 
       .playingInfo {
@@ -223,7 +249,7 @@
       .playingControl svg {
           width: 2em;
           height: 2em;
-          fill: white;
+          fill: black;
       }
 
    </style>
@@ -252,65 +278,72 @@
     </svg>
 
     <div class="container">
-        <div class="titleBar">
-           <div class="title">whatsPlaying</div>
-           <div id=clock class="clock"></div>
-           <img id="logo" class="logo" src="Spotify_Logo_RGB_White.png"></img>
-        </div>
+      <div class="spotifyContainer">
+            <div class="titleBar">
+            <!-- <div class="title">whatsPlaying</div> -->
+            <!-- <div id=clock class="clock"></div> -->
+            <!-- <img id="logo" class="logo" src="Spotify_Logo_RGB_White.png"></img> -->
+            </div>
 
-        <div id="loginScreen" class="screen screenOff">
-           <div class="screenContent">
-              <div id="loginContent" class="loginContent"></div>
-           </div>
-        </div>
+            <div id="loginScreen" class="screen screenOff">
+            <div class="screenContent">
+                <div id="loginContent" class="loginContent"></div>
+            </div>
+            </div>
 
-        <div id="errorScreen" class="screen screenOff">
-           <div class="screenContent">
-              <div id="errorContent" class="errorContent"></div>
-           </div>
-        </div>
+            <div id="errorScreen" class="screen screenOff">
+            <div class="screenContent">
+                <div id="errorContent" class="errorContent"></div>
+            </div>
+            </div>
 
-        <div id="idleScreen" class="screen screenOff">
-           <div class="screenContent">
-           </div>
-        </div>
+            <div id="idleScreen" class="screen screenOff">
+            <div class="screenContent">
+            </div>
+            </div>
 
-        <div id="sleepScreen" class="screen screenOff">
-           <div class="screenContent">
-              <div id="sleepTitle" class="sleepTitle">Zzzz...</div>
-              <div id="sleepContent" class="sleepContent"></div>
-           </div>
-        </div>
+            <div id="sleepScreen" class="screen screenOff">
+            <div class="screenContent">
+                <div id="sleepTitle" class="sleepTitle">Zzzz...</div>
+                <div id="sleepContent" class="sleepContent"></div>
+            </div>
+            </div>
 
-        <div id="playingScreen" class="screen screenOff">
-           <div class="playingContent">
-              <img id="playingAlbumImage" class="playingAlbumImage"></img>
-              <div class="playingInfo">
-                 <div id="playingTrack" class="playingTrack playingItem"></div>
-                 <div id="playingArtist" class="playingArtist playingItem"></div>
-                 <div id="playingAlbum" class="playingAlbum playingItem"></div>
-                 <div id="playingDate" class="playingDate playingItem"></div>
-                 <div id="playingMeter" class="playingMeter playingItem">
-                    <span id="playingMeterValue"></span>
-                 </div>
-
-                 <div id="playingControls" class="playingControls playingItem">
-                    <div id="playingPrev" class="playingControl" onclick="uiCmd('prev');">
-                       <svg><use xlink:href="#iconPrev"/></svg>
+            <div id="playingScreen" class="screen screenOff">
+            <div class="playingContent">
+                <img id="playingAlbumImage" class="playingAlbumImage"></img>
+                <div class="playingInfo">
+                    <div id="playingTrack" class="playingTrack playingItem"></div>
+                    <div id="playingArtist" class="playingArtist playingItem"></div>
+                    <div id="playingAlbum" class="playingAlbum playingItem"></div>
+                    <div id="playingDate" class="playingDate playingItem"></div>
+                    <div id="playingMeter" class="playingMeter playingItem">
+                        <span id="playingMeterValue"></span>
                     </div>
-                    <div id="playingPlay" class="playingControl" onclick="uiCmd('play');">
-                       <svg><use xlink:href="#iconPause"/></svg>
-                    </div>
-                    <div id="playingNext" class="playingControl" onclick="uiCmd('next');">
-                       <svg><use xlink:href="#iconNext"/></svg>
-                    </div>
-                 </div>
-              </div>
-           </div>
 
-           <div id="playingPlaylist" class="playingItem playingPlaylist"></div>
+                    <div id="playingControls" class="playingControls playingItem">
+                        <div id="playingPrev" class="playingControl" onclick="uiCmd('prev');">
+                        <svg><use xlink:href="#iconPrev"/></svg>
+                        </div>
+                        <div id="playingPlay" class="playingControl" onclick="uiCmd('play');">
+                        <svg><use xlink:href="#iconPause"/></svg>
+                        </div>
+                        <div id="playingNext" class="playingControl" onclick="uiCmd('next');">
+                        <svg><use xlink:href="#iconNext"/></svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="playingPlaylist" class="playingItem playingPlaylist"></div>
+            </div>
+        </div>
+        <div id="clock" class="clock"></div>
+        <div id="weather" class="weather">
+            <div id="temperature"></div>
         </div>
     </div>
+    
 
 </body>
 </html>

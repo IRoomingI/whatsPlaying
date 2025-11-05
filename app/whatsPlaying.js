@@ -35,12 +35,35 @@ var gLastVal = {playPerc: -1};  // cache of previous values
 
 var gAccessToken;  // store this from last call, but null on error
 
+// Weather information from open-meteo.com
+// Get values current temperature and weather code for a given latitude and longitude
+async function openMeteoApi(lat, long) {
+  try {
+    const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&current=temperature_2m,weather_code`)
+    if(!res.ok) {
+      console.error(`Open-Meteo Response status: ${res.status}`)
+    }
+
+    const result = await res.json()
+    return result
+  }
+  catch(e) {
+    console.error(e.message)
+  }
+} 
+
+
 // run single setInterval timer and handle our own timers manually in that
 var gTimer = {
   clock: {
     callback: updateClock,
     interval: 500,
     lastTic: 0
+  },
+  weather: {
+    callback: updateWeather,
+    interval: 900000, // 15 minutes
+    lastTic:0
   },
   timeBar: {
     callback: updatePayerUi,
@@ -338,17 +361,18 @@ function updateClock() {
 
   function timeStr(date) {
     var hr = date.getHours();
-    var ampm;
+    // var ampm;
 
-    if ( hr < 12 )
-      ampm = 'am';
-    else {
-      ampm = 'pm';
-      if (hr > 12)
-        hr -= 12;
-    }
+    // if ( hr < 12 )
+    //   ampm = 'am';
+    // else {
+    //   ampm = 'pm';
+    //   if (hr > 12)
+    //     hr -= 12;
+    // // }
 
-    return "".concat(hr, ':', pad(date.getMinutes()), ampm);
+    // return "".concat(hr, ':', pad(date.getMinutes()), ampm);
+    return "".concat(hr, ':', pad(date.getMinutes()));
   }
 
   var now = new Date();
@@ -360,6 +384,19 @@ function updateClock() {
   clock = document.getElementById('clock');
   if (clock)
     clock.innerHTML = timeStr(now);
+}
+
+async function updateWeather() {
+  const lat = Config.latitude
+  const long = Config.longitude
+
+  const weatherData = await openMeteoApi(lat, long)
+  var tempElem = document.getElementById("temperature")
+  if(tempElem) {
+    tempElem.innerHTML = `${Math.round(weatherData.current.temperature_2m)}°C`
+  }
+  
+  
 }
 
 function showPlayControls(show) {
@@ -512,7 +549,7 @@ async function getPlaybackState() {
         var playlist;
         if ( data.context && data.context.type == 'playlist' && data.context.href ) {
           var pl = await spotifyApiDirect('GET', data.context.href);
-          if ( pl ) {
+          if ( "data" in pl ) {
             playlist = pl.data.name;
           }
         }
